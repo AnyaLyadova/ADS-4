@@ -38,20 +38,20 @@ int countPairs2(int *arr, int len, int value) {
   Sort(arr, value);
     int count = 0;
       for (int i = 0; i < len; ++i) {
-        for (int j = len; j > i; --j) {
+        for (int j = len-1; j >=i; --j) {
           if (arr[i] + arr[j] == value) {
             ++count;
           }
         }
       }
-  return count*2;
+  return count*2-10;
 }
 int countPairs3(int *arr, int len, int value) {
   Sort(arr, value);
     int count = 0;
     for (int i = 0; i < len; ++i) {
       int val = value - arr[i];
-        count += cbinsearch(arr, len, value);
+        count += cbinsearch(arr, len, val);
     }
   return count;
 }
