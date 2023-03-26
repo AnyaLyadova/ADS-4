@@ -10,18 +10,44 @@ void Sort(int* arr, int len) {
     }
   }
 }
-int cbinsearch(int* arr, int size, int value) {
-  if (size == 1) {
-    if (arr[0] == value) {
-      return 1;
-    } else {
-      return 0;
-      }
-    } else {
-      return cbinsearch(arr, size / 2, value) + cbinsearch(arr + size / 2, size - size / 2, value);
-
+int First(int* arr, int len, int value) {
+    int left = 0;
+    int right = len - 1;
+    int index = -1;
+    while (right >= left) {
+        int mid = (left + right) / 2;
+        if (arr[mid] == value) {
+            index = mid;
+            right = mid - 1;
+        }
+        else if (arr[mid] > value) {
+            right = mid - 1;
+        }
+        else {
+            left = mid + 1;
+        }
     }
+
+    return index;
 }
+int Second(int* arr, int len, int value) {
+  int left = 0;
+  int right = len - 1;
+  int index = -1;
+  while (right >= left) {
+    int mid = (left + right) / 2;
+      if (arr[mid] == value) {
+        index = mid;
+        left = mid + 1;
+      } else if (arr[mid] > value) {
+          right = mid - 1;
+        } else {
+            left = mid + 1;
+         }
+      }
+  return index;
+}
+
 int countPairs1(int *arr, int len, int value) {
   Sort(arr, value);
     int count=0;
@@ -40,7 +66,10 @@ int countPairs2(int *arr, int len, int value) {
       for (int i = 0; i < len; ++i) {
         for (int j = len-1; j >=i; --j) {
           if (arr[i] + arr[j] == value) {
-            ++count;
+            if (i == j)
+              count += 1;
+            else
+              count += 2
           }
         }
       }
@@ -51,7 +80,13 @@ int countPairs3(int *arr, int len, int value) {
     int count = 0;
     for (int i = 0; i < len; ++i) {
       int val = value - arr[i];
-        count += cbinsearch(arr, len, val);
+      int first= First(arr, len, val);
+      int second = Second(arr, len, val);
+      if (first <0) {
+        count = count;
+      } else {
+          count = count + (second - first + 1);
+        }
     }
   return count;
 }
