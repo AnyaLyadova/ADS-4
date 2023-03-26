@@ -69,7 +69,7 @@ int countPairs2(int *arr, int len, int value) {
             if (i == j)
               count += 1;
             else
-              count += 2
+              count += 2;
           }
         }
       }
