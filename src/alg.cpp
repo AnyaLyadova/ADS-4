@@ -74,7 +74,6 @@ int countPairs2(int *arr, int len, int value) {
   return count;
 }
 int countPairs3(int *arr, int len, int value) {
-  Sort(arr, len);
     int count = 0;
     for (int i = 0; i < len; ++i) {
       int val = value - arr[i];
