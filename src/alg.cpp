@@ -79,7 +79,7 @@ int countPairs3(int *arr, int len, int value) {
     int val = value - arr[i];
     int first = First(arr, len, val);
     int second = Second(arr, len, val);
-    if (first <0) 
+    if (first <0){
       count = count;
     } else {
         count = count + (second - first + 1);
